@@ -12,6 +12,7 @@ module Bank
       else
           raise ArgumentError, "You can't start an account with a negative balance"
       end
+      @owner = Bank::Owner.new(@id)
     end
 
     def withdraw (amt_withdrawn)
