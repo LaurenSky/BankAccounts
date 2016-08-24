@@ -22,8 +22,8 @@ module Bank
     def self.all
       accounts = {}
       # /Documents/Ada/Week3/BankAccounts/support/accounts.csv
-      CSV.read('support/accounts.csv').each do |line|
-        accounts[line[0]] = self.new(line[0], line[1].to_i, line[2])
+      CSV.read('support/owners.csv').each do |line|
+        accounts[line[0].to_i] = self.new(line[0].to_i, line[1].to_i, line[2])
       end
       return accounts
     end
@@ -51,3 +51,8 @@ module Bank
 
   end
 end
+
+
+# ID - (Fixnum) a unique identifier for that Account
+# Balance - (Fixnum) the account balance amount, in cents (i.e., 150 would be $1.50)
+# OpenDate - (Datetime) when the account was opened
