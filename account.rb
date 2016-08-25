@@ -7,8 +7,8 @@ module Bank
 
     def initialize (id, balance, open_date = Time.now)
       @id = id
-
-      if balance >= 0
+      @min_balance = 0
+      if balance >= @min_balance
         @balance = balance/100
       else
         raise ArgumentError, "You can't start an account with a negative balance"
@@ -16,6 +16,7 @@ module Bank
 
       @date_opened = open_date
       #@owner = Bank::Owner.new(@id)
+      @withdrawal_fee = 0
     end
 
     # self.all - returns a collection of Account instances, representing all of the Accounts described in the CSV. See below for the CSV file specifications
@@ -34,15 +35,18 @@ module Bank
       return accounts[id]
     end
 
-    def withdraw (amt_withdrawn)
-      if @balance - amt_withdrawn > 0
-        @balance = @balance - amt_withdrawn
+    def withdraw (amount)
+      if (@balance - amount - @withdrawal_fee) >= @min_balance
+        @balance = @balance - amount - @withdrawal_fee
         return "$#{@balance}"
       else
         puts "Sorry, but you do not have that amount of money in your account."
         return "$#{@balance}"
       end
     end
+
+    # Does not allow the account to go negative. Will output a warning message and return the original un-modified balance.
+       #$1 checking account withdrawal fee taken out of the balance. Returns the updated account balance.
 
     def deposit (amt_deposited)
       @balance = @balance + amt_deposited
