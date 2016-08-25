@@ -20,7 +20,6 @@ module Bank
     # self.all - returns a collection of Owner instances, representing all of the Owners described in the CSV. See below for the CSV file specifications
     def self.all
       owners = {}
-      # /Documents/Ada/Week3/BankAccounts/support/accounts.csv
       CSV.read('support/owners.csv').each do |line|
         owners[line[0].to_i] = self.new(line[0].to_i, line[1], line[2], line[3], line[4], line[5])
       end
