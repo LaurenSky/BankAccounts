@@ -8,10 +8,10 @@ module Bank
       super(id, balance, open_date)
       # The initial balance cannot be less than $10. If it is, this will raise an ArgumentError
       @min_balance = 10
-      if @balance < @min_balance
-        raise ArgumentError, "You need at least #{ @min_balance } to open a savings account."
-      else
+      if (balance/100) >= @min_balance
         @balance = balance/100
+      else
+        raise ArgumentError, "You need at least $#{ @min_balance } to open a savings account."
       end
 
       @withdrawal_fee = 2   #$2 withdrawal fee for saving acct

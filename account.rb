@@ -8,7 +8,7 @@ module Bank
     def initialize (id, balance, open_date = Time.now)
       @id = id
       @min_balance = 0
-      if balance >= @min_balance
+      if (balance/100) >= @min_balance
         @balance = balance/100
       else
         raise ArgumentError, "You can't start an account with a negative balance."
@@ -48,8 +48,8 @@ module Bank
     # Does not allow the account to go negative. Will output a warning message and return the original un-modified balance.
        #$1 checking account withdrawal fee taken out of the balance. Returns the updated account balance.
 
-    def deposit (amt_deposited)
-      @balance = @balance + amt_deposited
+    def deposit (amount)
+      @balance = @balance + amount
       return "$#{ @balance }"
     end
 
