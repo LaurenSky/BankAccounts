@@ -11,7 +11,7 @@ module Bank
       if balance >= @min_balance
         @balance = balance/100
       else
-        raise ArgumentError, "You can't start an account with a negative balance"
+        raise ArgumentError, "You can't start an account with a negative balance."
       end
 
       @date_opened = open_date
@@ -38,10 +38,10 @@ module Bank
     def withdraw (amount)
       if (@balance - amount - @withdrawal_fee) >= @min_balance
         @balance = @balance - amount - @withdrawal_fee
-        return "$#{@balance}"
+        return "$#{ @balance }"
       else
-        puts "Sorry, but you do not have that amount of money in your account."
-        return "$#{@balance}"
+        puts "Sorry. You're transaction cannot be completed because it will take you below the required minimum amount of $#{ @min_balance }."
+        return "$#{ @balance }"
       end
     end
 
@@ -50,7 +50,7 @@ module Bank
 
     def deposit (amt_deposited)
       @balance = @balance + amt_deposited
-      return "$#{@balance}"
+      return "$#{ @balance }"
     end
 
   end

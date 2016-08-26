@@ -40,10 +40,10 @@ module Bank
         if (@balance - amount - @check_withdrawel_fee) >= @min_balance_check
           @num_of_checks_used += 1
           @balance = @balance - amount - @check_withdrawel_fee
-          return "$#{@balance}"
+          return "$#{ @balance }"
         else
           puts "Sorry, but you do not have that amount of money in your account."
-          return "$#{@balance}"
+          return "$#{ @balance }"
         end
 
       else
@@ -51,28 +51,12 @@ module Bank
         if (@balance - amount) >= @min_balance_check
           @num_of_checks_used += 1
           @balance = @balance - amount
-          return "$#{@balance}"
+          return "$#{ @balance }"
         else
           puts "Sorry, but you do not have that amount of money in your account."
-          return "$#{@balance}"
+          return "$#{ @balance }"
         end
       end
     end
-
   end
 end
-
-# p = Bank::CheckingAccount.new(1234, 60000)
-# puts p.withdraw_using_check(100)
-# puts p.num_of_checks_used
-# puts p.withdraw_using_check(100)
-# puts p.num_of_checks_used
-# puts p.withdraw_using_check(100)
-# puts p.num_of_checks_used
-
-
-
-# puts p
-    # Allows the account to go into overdraft up to -$10 but not any lower
-    # The user is allowed 3 free check uses in one month, but any subsequent use adds a $2 transaction fee
-    # 3 free check uses, then a fee until we call the reset_checks method to reset. Do not use time in this.
